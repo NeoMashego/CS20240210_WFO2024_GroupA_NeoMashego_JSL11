@@ -25,6 +25,10 @@ const elements = {
   showSideBarBtn: document.getElementById('show-side-bar-btn'),
   themeSwitch: document.getElementById('switch'),
   createNewTaskBtn: document.getElementById('create-task-btn'),
+  headerBoardName: document.getElementById('header-board-name'),
+  columnDivs: document.getElementsByClassName('column-div'),
+  modalWindow: document.getElementsByClassName("edit-task-modal-window"),
+  editTaskModal: document.getElementsByClassName('edit-task-div'),
 }
 
 let activeBoard = ""
