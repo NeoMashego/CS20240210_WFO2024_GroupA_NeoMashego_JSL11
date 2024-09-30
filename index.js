@@ -20,7 +20,11 @@ console.log(initializeData)   //check function as function is declared but its v
 
 // TASK: Get elements from the DOM
 const elements = {
-
+  filterDiv: document.getElementById('filterDiv'),
+  hideSideBarBtn: document.getElementById('hide-side-bar-btn'),
+  showSideBarBtn: document.getElementById('show-side-bar-btn'),
+  themeSwitch: document.getElementById('switch'),
+  createNewTaskBtn: document.getElementById('create-task-btn'),
 }
 
 let activeBoard = ""
