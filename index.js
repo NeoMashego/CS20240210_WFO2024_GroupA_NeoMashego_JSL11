@@ -16,7 +16,7 @@ function initializeData() {
     console.log('Data already exists in localStorage');
   }
 }
-console.log(initializeData)   //check function as function is declared but its value is never read
+initializeData()   //check function as function is declared but its value is never read
 
 // TASK: Get elements from the DOM
 const elements = {
@@ -27,8 +27,9 @@ const elements = {
   createNewTaskBtn: document.getElementById('create-task-btn'),
   headerBoardName: document.getElementById('header-board-name'),
   columnDivs: document.getElementsByClassName('column-div'),
-  modalWindow: document.getElementsByClassName("edit-task-modal-window"),
-  editTaskModal: document.getElementsByClassName('edit-task-div'),
+  modalWindow: document.getElementsByClassName("modal-window"),
+  editTaskModal: document.getElementsByClassName('edit-task-modal-window'),
+  sideBar: document.getElementById('side-bar-div'),
 }
 
 let activeBoard = ""
@@ -180,7 +181,7 @@ function setupEventListeners() {
   elements.createNewTaskBtn.addEventListener('click', () => {
     toggleModal(true);
     elements.filterDiv.style.display = 'block'; // Also show the filter overlay
-  });
+  }); //edit disciption, task status, and save task
 
   // Add new task form submission event listener
   elements.modalWindow.addEventListener('submit',  (event) => {
@@ -214,11 +215,21 @@ function addTask(event) {
       refreshTasksUI();
     }
 }
+//addTask(event);
 
 
 function toggleSidebar(show) {
- 
+  if(show){
+    elements.showSideBarBtn.style.display = 'none';
+    elements.sideBar.style.display = 'block';
+    localStorage.setItem('showSideBar', 'true')
+  } else {
+    elements.showSideBarBtn.style.display = 'block';
+    elements.sideBar.style.display = 'none';
+    localStorage.setItem('showSideBar', 'false')
+  }
 }
+toggleSidebar() //call function
 
 function toggleTheme() {
  
