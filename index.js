@@ -222,19 +222,28 @@ function toggleSidebar(show) {
   if(show){
     elements.showSideBarBtn.style.display = 'none';
     elements.sideBar.style.display = 'block';
-    localStorage.setItem('showSideBar', 'true')
+    localStorage.setItem('showSideBar', 'true');
   } else {
     elements.showSideBarBtn.style.display = 'block';
     elements.sideBar.style.display = 'none';
-    localStorage.setItem('showSideBar', 'false')
+    localStorage.setItem('showSideBar', 'false');
   }
 }
 toggleSidebar() //call function
 
-function toggleTheme() {
- 
-}
 
+function toggleTheme() {
+  if(elements.themeSwitch.checked){
+    document.body.classList.add('light-theme')
+    document.body.classList.remove('dark-theme')
+    localStorage.setItem('themeSwitch', 'light');
+  } else {
+    document.body.classList.add('dark-theme')
+    document.body.classList.remove('light-theme')
+    localStorage.setItem('themeSwitch', 'dark');
+  }
+}
+toggleTheme()   //call function
 
 
 function openEditTaskModal(task) {
@@ -282,3 +291,4 @@ function init() {
   document.body.classList.toggle('light-theme', isLightTheme);
   fetchAndDisplayBoardsAndTasks(); // Initial display of boards and tasks
 }
+init()
