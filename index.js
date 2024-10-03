@@ -48,6 +48,7 @@ function fetchAndDisplayBoardsAndTasks() {
     refreshTasksUI();
   }
 }
+//fetchAndDisplayBoardsAndTasks()
 
 // Creates different boards in the DOM
 // TASK: Fix Bugs
@@ -69,6 +70,7 @@ function displayBoards(boards) {
   });
 
 }
+//displayBoards()
 
 // Filters tasks corresponding to the board name and displays them on the DOM.
 // TASK: Fix Bugs
@@ -104,6 +106,7 @@ function filterAndDisplayTasksByBoard(boardName) {
     });
   });
 }
+//filterAndDisplayTasksByBoard()
 
 
 function refreshTasksUI() {
@@ -261,6 +264,7 @@ function openEditTaskModal(task) {
 
   toggleModal(true, elements.editTaskModal); // Show the edit task modal
 }
+openEditTaskModal()   //call function
 
 function saveTaskChanges(taskId) {
   // Get new user inputs
@@ -276,6 +280,7 @@ function saveTaskChanges(taskId) {
 
   refreshTasksUI();
 }
+saveTaskChanges()   //call function
 
 /*************************************************************************************************************************************************/
 
