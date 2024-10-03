@@ -33,6 +33,10 @@ const elements = {
   editTaskModal: document.getElementsByClassName('edit-task-modal-window'),
   sideBar: document.getElementById('side-bar-div'),
   boardBtn: document.querySelectorAll('.board-btn'),
+  //edit task DOM button elements
+  saveTaskBtn: document.getElementById('save-task-changes-btn'),
+  cancelEditBtn: document.getElementById('cancel-edit-btn'),
+  deleteTaskBtn: document.getElementById('delete-task-btn'),
 }
 
 let activeBoard = ""
@@ -44,7 +48,7 @@ function fetchAndDisplayBoardsAndTasks() {
   const boards = [...new Set(tasks.map(task => task.board).filter(Boolean))];
   displayBoards(boards);
   if (boards.length > 0) {
-    const localStorageBoard = JSON.parse(localStorage.getItem("activeBoard"))
+    const localStorageBoard = JSON.parse(localStorage.getItem('activeBoard'))
     activeBoard = localStorageBoard ? localStorageBoard : boards[0]; 
     elements.headerBoardName.textContent = activeBoard
     styleActiveBoard(activeBoard)
@@ -83,7 +87,7 @@ function filterAndDisplayTasksByBoard(boardName) {
   // Ensure the column titles are set outside of this function or correctly initialized before this function runs
 
   elements.columnDivs.forEach(column => {
-    const status = column.getAttribute("data-status");
+    const status = column.getAttribute('data-status');
     
     // Reset column content while preserving the column title
     column.innerHTML = `<div class="column-head-div">
@@ -91,12 +95,12 @@ function filterAndDisplayTasksByBoard(boardName) {
                           <h4 class="columnHeader">${status.toUpperCase()}</h4>
                         </div>`;
 
-    const tasksContainer = document.createElement("div");
+    const tasksContainer = document.createElement('div');
     column.appendChild(tasksContainer);
 
     filteredTasks.filter(task => task.status === status).forEach(task => { 
-      const taskElement = document.createElement("div");
-      taskElement.classList.add("task-div");
+      const taskElement = document.createElement('div');
+      taskElement.classList.add('task-div');
       taskElement.textContent = task.title;
       taskElement.setAttribute('data-task-id', task.id);
 
@@ -157,8 +161,7 @@ function addTaskToUI(task) {
 
 function setupEventListeners() {
   // Cancel editing task event listener
-  const cancelEditBtn = document.getElementById('cancel-edit-btn');
-  cancelEditBtn.addEventListener('click', () => {
+  elements.cancelEditBtn.addEventListener('click', () => {
     toggleModal(false, elements.editTaskModal)
   })
 
