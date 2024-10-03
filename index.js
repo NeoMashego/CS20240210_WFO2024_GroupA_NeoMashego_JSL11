@@ -37,12 +37,13 @@ const elements = {
   //container DOM elements for Doing etc.
   columnDivs: document.querySelectorAll('.column-div'),
   filterDiv: document.getElementById('filterDiv'),
+  tasksContainer: document.querySelector('.tasks-container'),
   //modal window DOM elements
   modalWindow: document.querySelector('.modal-window'),
   inputDIv: document.getElementsByClassName('input-div'),
   titleInput: document.getElementById('title-input'),
   //edit task Form DOM elements
-  editTaskModal: document.querySelectorAll('.edit-task-modal-window'),
+  editTaskModal: document.querySelector('.edit-task-modal-window'),
   editTaskForm: document.getElementById('edit-task-form'),
   editTaskHeader: document.getElementById('edit-task-header'),
   editTitleInput: document.getElementById('edit-task-title-input'),
@@ -158,8 +159,7 @@ function addTaskToUI(task) {
     return;
   }
 
-  let tasksContainer = column.querySelector('.tasks-container');
-  if (!tasksContainer) {
+  if (!elements.tasksContainer) {
     console.warn(`Tasks container not found for status: ${task.status}, creating one.`);
     tasksContainer = document.createElement('div');
     tasksContainer.className = 'tasks-container';
@@ -206,18 +206,34 @@ function setupEventListeners() {
   elements.createNewTaskBtn.addEventListener('click', () => {
     toggleModal(true);
     elements.filterDiv.style.display = 'block'; // Also show the filter overlay
+    putTask() //put task out there
   }); //edit disciption, task status, and save task
 
   // Add new task form submission event listener
-  /*elements.modalWindow.addEventListener('submit',  (event) => {
+  elements.modalWindow.addEventListener('submit',  (event) => {
     event.preventDefault();
     addTask(event)
-  });*/
-  
+  });
+
   //open modalWindow form when addNewTaskBtn is clicked
   elements.addNewTaskBtn.addEventListener('click', () => {
     elements.modalWindow.style.display = 'block';
   });
+
+  //edit tasks when clicked and open its modal
+  elements.tasksContainer.addEventListener('click', () => {
+    elements.editTaskModal.style.display = 'block';
+  })
+
+  //saves task changes and adds to the board...
+  elements.saveTaskChangesBtn.addEventListener('click', () => {
+    saveTaskChanges(taskId);  //saves changes
+    putTask();    //add task to board
+  })
+
+  elements.deleteTaskBtn.addEventListener('click', () => {
+    deleteTask();
+  })
 }
 
 // Toggles tasks modal
@@ -236,12 +252,13 @@ function addTask(event) {
   //Get new user inputs
   const titleInput = document.getElementById('title-input').value;
   const descInput = document.getElementById('desc-input').value;
-  const selectStatus = document.getElementById('select-input').value;
+  const selectStatus = document.getElementById('select-input');
+  //const selectValue = selectStatus.options[selectStatus.selectedIndex].value
   //Assign user input to the task object
     const task = {
       title: titleInput,
       desc: descInput,
-      select: selectStatus,
+      status: selectStatus.value,
       board: activeBoard,
     };
     const newTask = createNewTask(task);
@@ -251,6 +268,7 @@ function addTask(event) {
       elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
       event.target.reset();
       refreshTasksUI();
+      //putTask()
     }
 }
 //addTask(event);
@@ -289,6 +307,11 @@ function openEditTaskModal(task) {
   // Got button elements from the task modal and placed in elements DOM
 
   // Call saveTaskChanges upon click of Save Changes button
+  /*if(elements.saveChangesBtn.checked){
+    elements.saveChangesBtn.addEventListener('click', () => {
+      putTask(task)
+    })
+  }*/
 
   // Delete task using a helper function and close the task modal
 
