@@ -18,6 +18,8 @@ function initializeData() {
 }
 initializeData()   //check function as function is declared but its value is never read
 
+const tasksFromStorage = [...initialData,getTasks()]
+
 // TASK: Get elements from the DOM
 const elements = {
   filterDiv: document.getElementById('filterDiv'),
@@ -70,7 +72,6 @@ function displayBoards(boards) {
   });
 
 }
-//displayBoards()
 
 // Filters tasks corresponding to the board name and displays them on the DOM.
 // TASK: Fix Bugs
@@ -106,7 +107,6 @@ function filterAndDisplayTasksByBoard(boardName) {
     });
   });
 }
-//filterAndDisplayTasksByBoard()
 
 
 function refreshTasksUI() {
@@ -205,9 +205,17 @@ function toggleModal(show, modal = elements.modalWindow) {
 function addTask(event) {
   event.preventDefault(); 
 
+  //Get new user inputs
+  const titleInput = document.getElementById('title-input').value;
+  const descInput = document.getElementById('desc-input').value;
+  const selectStatus = document.getElementById('select-input');
+  const selectValue = selectStatus.options[selectStatus.selectedIndex].value
   //Assign user input to the task object
     const task = {
-      
+      title: titleInput,
+      desc: descInput,
+      select: selectValue,
+      board: activeBoard,
     };
     const newTask = createNewTask(task);
     if (newTask) {
@@ -264,7 +272,6 @@ function openEditTaskModal(task) {
 
   toggleModal(true, elements.editTaskModal); // Show the edit task modal
 }
-openEditTaskModal()   //call function
 
 function saveTaskChanges(taskId) {
   // Get new user inputs
@@ -280,7 +287,6 @@ function saveTaskChanges(taskId) {
 
   refreshTasksUI();
 }
-saveTaskChanges()   //call function
 
 /*************************************************************************************************************************************************/
 
