@@ -22,21 +22,38 @@ function initializeData() {
 
 // TASK: Get elements from the DOM
 const elements = {
-  filterDiv: document.getElementById('filterDiv'),
+  //sideBar and theme DOM elements
   hideSideBarBtn: document.getElementById('hide-side-bar-btn'),
   showSideBarBtn: document.getElementById('show-side-bar-btn'),
   themeSwitch: document.getElementById('switch'),
-  createNewTaskBtn: document.getElementById('create-task-btn'),
-  headerBoardName: document.getElementById('header-board-name'),
-  columnDivs: document.getElementsByClassName('column-div'),
-  modalWindow: document.querySelectorAll('.modal-window'),
-  editTaskModal: document.getElementsByClassName('edit-task-modal-window'),
   sideBar: document.getElementById('side-bar-div'),
+  //headerBoard DOM elements
+  headerBoardName: document.getElementById('header-board-name'),
+  dropDownBtn: document.getElementById('dropdownBtn'),
+  threeDotsIcon: document.getElementById('three-dots-icon'),
   boardBtn: document.querySelectorAll('.board-btn'),
+  editBoardBtn: document.getElementById('edit-board-btn'),
+  editBoardDiv: document.getElementById('editBoardDiv'),
+  //container DOM elements for Doing etc.
+  columnDivs: document.querySelectorAll('.column-div'),
+  filterDiv: document.getElementById('filterDiv'),
+  //modal window DOM elements
+  modalWindow: document.querySelector('.modal-window'),
+  inputDIv: document.getElementsByClassName('input-div'),
+  titleInput: document.getElementById('title-input'),
+  //edit task Form DOM elements
+  editTaskModal: document.querySelectorAll('.edit-task-modal-window'),
+  editTaskForm: document.getElementById('edit-task-form'),
+  editTaskHeader: document.getElementById('edit-task-header'),
+  editTitleInput: document.getElementById('edit-task-title-input'),
+  editDescInput: document.getElementById('edit-task-desc-input'),
+  editSelect: document.getElementById('edit-select-status'),
   //edit task DOM button elements
-  saveTaskBtn: document.getElementById('save-task-changes-btn'),
+  saveTaskChangesBtn: document.getElementById('save-task-changes-btn'),
   cancelEditBtn: document.getElementById('cancel-edit-btn'),
   deleteTaskBtn: document.getElementById('delete-task-btn'),
+  createNewTaskBtn: document.getElementById('create-task-btn'),
+  addNewTaskBtn: document.getElementById('add-new-task-btn'),
 }
 
 let activeBoard = ""
@@ -214,13 +231,12 @@ function addTask(event) {
   //Get new user inputs
   const titleInput = document.getElementById('title-input').value;
   const descInput = document.getElementById('desc-input').value;
-  const selectStatus = document.getElementById('select-input');
-  const selectValue = selectStatus.options[selectStatus.selectedIndex].value
+  const selectStatus = document.getElementById('select-input').value;
   //Assign user input to the task object
     const task = {
       title: titleInput,
       desc: descInput,
-      select: selectValue,
+      select: selectStatus,
       board: activeBoard,
     };
     const newTask = createNewTask(task);
@@ -265,16 +281,9 @@ function toggleTheme() {
 
 function openEditTaskModal(task) {
   // Set task details in modal inputs
-  const editTitleInput = document.getElementById('edit-task-title-input').value;
-  const editDescInput = document.getElementById('edit-task-desc-input').value;
-  const editSelect = document.getElementById('edit-select-status');
-  const editselectValue = editSelect.options[editSelect.selectedIndex].value
-
-  // Get button elements from the task modal
-
+  // Got button elements from the task modal and placed in elements DOM
 
   // Call saveTaskChanges upon click of Save Changes button
- 
 
   // Delete task using a helper function and close the task modal
 
