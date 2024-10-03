@@ -16,9 +16,9 @@ function initializeData() {
     console.log('Data already exists in localStorage');
   }
 }
-initializeData()   //check function as function is declared but its value is never read
+//initializeData()   //check function as function is declared but its value is never read
 
-const tasksFromStorage = [...initialData,getTasks()]
+//const tasksFromStorage = [...initialData,getTasks()]
 
 // TASK: Get elements from the DOM
 const elements = {
@@ -29,9 +29,10 @@ const elements = {
   createNewTaskBtn: document.getElementById('create-task-btn'),
   headerBoardName: document.getElementById('header-board-name'),
   columnDivs: document.getElementsByClassName('column-div'),
-  modalWindow: document.getElementsByClassName("modal-window"),
+  modalWindow: document.querySelectorAll('.modal-window'),
   editTaskModal: document.getElementsByClassName('edit-task-modal-window'),
   sideBar: document.getElementById('side-bar-div'),
+  boardBtn: document.querySelectorAll('.board-btn'),
 }
 
 let activeBoard = ""
@@ -116,13 +117,13 @@ function refreshTasksUI() {
 // Styles the active board by adding an active class
 // TASK: Fix Bugs
 function styleActiveBoard(boardName) {
-  document.querySelectorAll('.board-btn').foreach(btn => { 
+  elements.boardBtn.forEach(btn => { 
     
     if(btn.textContent === boardName) {
-      btn.add('active') 
+      btn.classList.add('active') 
     }
     else {
-      btn.remove('active'); 
+      btn.classList.remove('active'); 
     }
   });
 }
@@ -187,9 +188,10 @@ function setupEventListeners() {
   }); //edit disciption, task status, and save task
 
   // Add new task form submission event listener
-  elements.modalWindow.addEventListener('submit',  (event) => {
+  /*elements.modalWindow.addEventListener('submit',  (event) => {
+    event.preventDefault();
     addTask(event)
-  });
+  });*/
 }
 
 // Toggles tasks modal
@@ -254,7 +256,7 @@ function toggleTheme() {
     localStorage.setItem('themeSwitch', 'dark');
   }
 }
-toggleTheme()   //call function
+//toggleTheme()   //call function
 
 
 function openEditTaskModal(task) {
@@ -295,6 +297,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function init() {
+  initializeData();
   setupEventListeners();
   const showSidebar = localStorage.getItem('showSideBar') === 'true';
   toggleSidebar(showSidebar);
@@ -302,4 +305,4 @@ function init() {
   document.body.classList.toggle('light-theme', isLightTheme);
   fetchAndDisplayBoardsAndTasks(); // Initial display of boards and tasks
 }
-init()
+//init()
