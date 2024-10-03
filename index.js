@@ -213,6 +213,11 @@ function setupEventListeners() {
     event.preventDefault();
     addTask(event)
   });*/
+  
+  //open modalWindow form when addNewTaskBtn is clicked
+  elements.addNewTaskBtn.addEventListener('click', () => {
+    elements.modalWindow.style.display = 'block';
+  });
 }
 
 // Toggles tasks modal
