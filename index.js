@@ -226,12 +226,12 @@ function setupEventListeners() {
   //edit tasks when clicked and open its modal
   elements.tasksContainer.addEventListener('click', () => {
     elements.editTaskModal.style.display = 'block';
+    openEditTaskModal();
   })
 
   //saves task changes and adds to the board...
   elements.saveTaskChangesBtn.addEventListener('click', () => {
-    saveTaskChanges(taskId);  //saves changes
-    putTask();    //add task to board
+    saveTaskChanges(task.id);  //saves changes
   })
 
   elements.deleteTaskBtn.addEventListener('click', () => {
@@ -307,14 +307,12 @@ function toggleTheme() {
 
 function openEditTaskModal(task) {
   // Set task details in modal inputs
+  task.editTitleInput = elements.editTitleInput.value;
+  task.editDescInput = elements.editDescInput.value;
+  task.editSelectStatus = elements.editSelectStatus.value;
   // Got button elements from the task modal and placed in elements DOM
 
   // Call saveTaskChanges upon click of Save Changes button
-  /*if(elements.saveChangesBtn.checked){
-    elements.saveChangesBtn.addEventListener('click', () => {
-      putTask(task)
-    })
-  }*/
 
   // Delete task using a helper function and close the task modal
 
