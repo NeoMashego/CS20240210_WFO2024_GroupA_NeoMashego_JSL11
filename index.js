@@ -42,13 +42,16 @@ const elements = {
   modalWindow: document.querySelector('.modal-window'),
   inputDIv: document.getElementsByClassName('input-div'),
   titleInput: document.getElementById('title-input'),
+  //new task form DOM elements
+  titleInput: document.getElementById('title-input'),
+  descInput: document.getElementById('desc-input'),
   //edit task Form DOM elements
   editTaskModal: document.querySelector('.edit-task-modal-window'),
   editTaskForm: document.getElementById('edit-task-form'),
   editTaskHeader: document.getElementById('edit-task-header'),
   editTitleInput: document.getElementById('edit-task-title-input'),
   editDescInput: document.getElementById('edit-task-desc-input'),
-  editSelect: document.getElementById('edit-select-status'),
+  editSelectStatus: document.getElementById('edit-select-status'),
   //edit task DOM button elements
   saveTaskChangesBtn: document.getElementById('save-task-changes-btn'),
   cancelEditBtn: document.getElementById('cancel-edit-btn'),
@@ -341,7 +344,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function init() {
-  //initializeData();
+  initializeData();
   setupEventListeners();
   const showSidebar = localStorage.getItem('showSideBar') === 'true';
   toggleSidebar(showSidebar);
