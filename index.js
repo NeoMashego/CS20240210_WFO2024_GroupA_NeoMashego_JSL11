@@ -206,33 +206,27 @@ function setupEventListeners() {
   elements.themeSwitch.addEventListener('change', toggleTheme);
 
   // Show Add New Task Modal event listener
-  elements.createNewTaskBtn.addEventListener('click', () => {
+  elements.createNewTaskBtn.addEventListener('click', (event) => {
     toggleModal(true);
     elements.filterDiv.style.display = 'block'; // Also show the filter overlay
-    putTask(task) //put task out there
-  }); //edit disciption, task status, and save task
-
-  /*/ Add new task form submission event listener
-  elements.modalWindow.addEventListener('submit',  (event) => {
-    event.preventDefault();
-    addTask(event)
-  });*/
+    addTask(event) //add task out there
+  });
 
   //open modalWindow form when addNewTaskBtn is clicked
   elements.addNewTaskBtn.addEventListener('click', () => {
     elements.modalWindow.style.display = 'block';
   });
 
-  //adds new task when create button clicked
-  elements.createNewTaskBtn.addEventListener('click', (event) => {
-    addTask(event);
-  })
-
   //edit tasks when clicked and open its modal
   elements.tasksContainer.addEventListener('click', (task) => {
     elements.editTaskModal.style.display = 'block';
     openEditTaskModal(task.id);
   })
+
+  // Add new task form submission event listener
+  elements.modalWindow.addEventListener('submit',  (event) => {
+    addTask(event)
+  });
 }
 
 // Toggles tasks modal
@@ -252,7 +246,7 @@ function addTask(event) {
   const titleInput = document.getElementById('title-input').value;
   const descInput = document.getElementById('desc-input').value;
   const selectStatus = document.getElementById('select-status').value;
-  //const selectValue = selectStatus.options[selectStatus.selectedIndex].value
+
   //Assign user input to the task object
     const task = {
       title: titleInput,
