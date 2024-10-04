@@ -223,10 +223,6 @@ function setupEventListeners() {
     openEditTaskModal(task.id);
   })
 
-  // Add new task form submission event listener
-  elements.modalWindow.addEventListener('submit',  (event) => {
-    addTask(event)
-  });
 }
 
 // Toggles tasks modal
