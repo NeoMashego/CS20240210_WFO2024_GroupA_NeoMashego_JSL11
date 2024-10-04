@@ -223,6 +223,11 @@ function setupEventListeners() {
     elements.modalWindow.style.display = 'block';
   });
 
+  //adds new task when create button clicked
+  elements.createNewTaskBtn.addEventListener('click', (event) => {
+    addTask(event);
+  })
+
   //edit tasks when clicked and open its modal
   elements.tasksContainer.addEventListener('click', () => {
     elements.editTaskModal.style.display = 'block';
@@ -230,10 +235,11 @@ function setupEventListeners() {
   })
 
   //saves task changes and adds to the board...
-  elements.saveTaskChangesBtn.addEventListener('click', () => {
+  elements.saveTaskChangesBtn.addEventListener('click', (task) => {
     saveTaskChanges(task.id);  //saves changes
   })
 
+  //delete task
   elements.deleteTaskBtn.addEventListener('click', () => {
     deleteTask();
   })
@@ -255,13 +261,13 @@ function addTask(event) {
   //Get new user inputs
   const titleInput = document.getElementById('title-input').value;
   const descInput = document.getElementById('desc-input').value;
-  const selectStatus = document.getElementById('select-input');
+  const selectStatus = document.getElementById('select-status').value;
   //const selectValue = selectStatus.options[selectStatus.selectedIndex].value
   //Assign user input to the task object
     const task = {
       title: titleInput,
       desc: descInput,
-      status: selectStatus.value,
+      status: selectStatus,
       board: activeBoard,
     };
     const newTask = createNewTask(task);
@@ -327,15 +333,12 @@ function saveTaskChanges(taskId) {
     title: elements.editTitleInput.value,
     desc: elements.editDescInput.value,
     status: elements.editSelectStatus.value,
-    board: activateBoard,
+    board: activeBoard,
   } 
 
-
   // Update task using a hlper functoin
- 
 
   // Close the modal and refresh the UI to reflect the changes
-
   refreshTasksUI();
 }
 
